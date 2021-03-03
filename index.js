@@ -5,4 +5,7 @@ app.use(async ctx => {
   ctx.body = 'Hello World';
 });
 
-app.listen(8080);
+const PORT = process.env.PORT || 80
+console.log(PORT)
+
+app.listen(PORT);
