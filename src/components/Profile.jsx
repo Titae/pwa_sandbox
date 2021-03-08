@@ -4,7 +4,7 @@ import { Card, Button } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 
 const Profile = () => {
-  const { currentUser, logout } = useAuth()
+  const { logout } = useAuth()
   return (
     <Card>
       <Card.Body>

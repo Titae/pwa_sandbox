@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 
 const SignUp = () => {
-  const { currentUser, signup } = useAuth()
+  const { signup } = useAuth()
   const emailRef = useRef()
   const passwordRef = useRef()
   const confirmationRef = useRef()
@@ -21,9 +21,7 @@ const SignUp = () => {
     setError("")
     setLoading(true)
     signup(emailRef.current.value, passwordRef.current.value).then((result) => {
-      console.log(result)
     }).catch((error) => {
-      console.error(error.message)
       setError("Failed to sign up")
     }).finally(() => {
       setLoading(false)
