@@ -4,13 +4,13 @@ import { Route, Redirect } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 
 const CustomRoute = ({ component: Component, pub, ...props }) => {
-  const { currentUser } = useAuth()
+  const { user } = useAuth()
   return (
     <Route {...props} render={(props) => {
       if (!pub) {
-        return currentUser ? <Component {...props}/> : <Redirect to="/login"/>
+        return user ? <Component {...props}/> : <Redirect to="/login"/>
       } else {
-        return currentUser ? <Redirect to="/"/> : <Component {...props} />
+        return user ? <Redirect to="/"/> : <Component {...props} />
       }
     }}>
     </Route>

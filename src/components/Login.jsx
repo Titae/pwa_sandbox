@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 
 const Login = () => {
-  const { currentUser, signin } = useAuth()
+  const { user, signin } = useAuth()
   const history = useHistory()
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -17,8 +17,7 @@ const Login = () => {
     e.preventDefault()
     setLoading(true)
     setError("")
-    signin(emailRef.current.value, passwordRef.current.value).then((result) => {
-    }).catch((error) => {
+    signin(emailRef.current.value, passwordRef.current.value).catch(() => {
       setError("Failed to log in")
     }).finally(() => {
       setLoading(false)
@@ -26,13 +25,13 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (history && currentUser) {
+    if (history && user) {
       history.push("/")
     }
-  }, [currentUser, history])
+  }, [user, history])
   
   return (
-    <>
+    <div className="w-100" style={{maxWidth: "400px"}}>
       <Card>
         <Card.Body>
         <h2 className="text-center mb-4">Log In</h2>
@@ -56,7 +55,7 @@ const Login = () => {
       <div className="w-100 text-center mt-2">
         Need an account ? <Link to="/signup">Sign Up</Link>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -1,0 +1,10 @@
+.msg > span {
+    background-color: rgba(0, 0, 0, 0.2);
+    max-width: 80%;
+    border: solid 1px rgba(0, 0, 255, 0.3);
+    padding: 5px;
+}
+
+.msg > label {
+    font-size: 10px;
+}

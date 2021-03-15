@@ -7,6 +7,7 @@ import { useAuth } from '../contexts/AuthContext'
 const SignUp = () => {
   const { signup } = useAuth()
   const emailRef = useRef()
+  const displayNameRef = useRef()
   const passwordRef = useRef()
   const confirmationRef = useRef()
   const [error, setError] = useState()
@@ -20,7 +21,11 @@ const SignUp = () => {
     }
     setError("")
     setLoading(true)
-    signup(emailRef.current.value, passwordRef.current.value).then((result) => {
+    signup(emailRef.current.value, passwordRef.current.value).then(({user}) => {
+      console.log("signup done, adding diplayName...")
+      user.updateProfile({ displayName: displayNameRef.current.value }).then((result) => {
+        console.log("displayName updated")
+      })
     }).catch((error) => {
       setError("Failed to sign up")
     }).finally(() => {
@@ -29,7 +34,7 @@ const SignUp = () => {
   }
   
   return (
-    <>
+    <div className="w-100" style={{maxWidth: "400px"}}>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Sign up</h2>
@@ -38,6 +43,10 @@ const SignUp = () => {
             <Form.Group>
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" required ref={emailRef}/>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" required ref={displayNameRef}/>
             </Form.Group>
             <Form.Group>
               <Form.Label>Password</Form.Label>
@@ -54,7 +63,7 @@ const SignUp = () => {
       <div className="w-100 text-center mt-2">
         Already have an account ? <Link to="/login">Sign In</Link>
       </div>
-    </>
+    </div>
   )
 }
 
