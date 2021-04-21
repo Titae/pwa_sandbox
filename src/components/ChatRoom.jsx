@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useParams } from 'react-router'
 import { Container, Form, Button, InputGroup } from 'react-bootstrap'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 
@@ -8,6 +9,7 @@ import Message from './Message'
 
 const ChatRoom = () => {
   const { user } = useAuth()
+  const { roomId } = useParams()
   const [message, setMessage] = useState("")
 
   const collection = firestore.collection("messages")
@@ -16,7 +18,7 @@ const ChatRoom = () => {
   const endRef = useRef(null)
 
   useEffect(() => {
-    const unsubscribe = collection.orderBy("createdAt", "desc").limit(limit).onSnapshot((res) => {
+    const unsubscribe = collection.orderBy("createdAt", "desc").where("roomId", "==", roomId).limit(limit).onSnapshot((res) => {
       setMessages(res.docs.map(doc => doc.data()).reverse())
     })
     return unsubscribe
@@ -38,6 +40,7 @@ const ChatRoom = () => {
       uid,
       photoURL,
       displayName,
+      roomId,
     }).then(() => {
       setMessage("")
     })
