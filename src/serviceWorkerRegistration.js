@@ -20,8 +20,10 @@ const isLocalhost = Boolean(
 
 export function register(config) {
   console.log("registration")
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-    console.log("pdocuction mode, serviceworker available in navigator")
+  if (
+    //process.env.NODE_ENV === 'production' && 
+    'serviceWorker' in navigator) {
+    console.log("serviceworker available in navigator")
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
     if (publicUrl.origin !== window.location.origin) {
@@ -54,7 +56,7 @@ export function register(config) {
       }
     });
   } else {
-    console.log("dev mode / no serviceworker available in navigator")
+    console.log("no serviceworker available in navigator")
   }
 }
 
