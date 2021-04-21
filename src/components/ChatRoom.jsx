@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Container, Form, Button, InputGroup, FormFile } from 'react-bootstrap'
+import { Container, Form, Button, InputGroup } from 'react-bootstrap'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 
 import firebase, { firestore } from '../firebase'
@@ -14,8 +14,6 @@ const ChatRoom = () => {
   const [limit, setLimit] = useState(50)
   const [messages, setMessages] = useState([])
   const endRef = useRef(null)
-
-  console.log(firestore)
 
   useEffect(() => {
     const unsubscribe = collection.orderBy("createdAt", "desc").limit(limit).onSnapshot((res) => {
