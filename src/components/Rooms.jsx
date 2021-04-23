@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom'
-import { Form, Button, InputGroup } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import { Container, Row, Form, Button, InputGroup } from 'react-bootstrap'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 
 import firebase, { firestore } from '../firebase'
@@ -30,8 +30,8 @@ const Rooms = () => {
 
 
     return (
-        <div>
-            {rooms.map(room => <Link key={room.id} to={`/room/${room.id}`}>{room.title}</Link>)}
+        <Container fluid className="m-0 p-0 align-self-stretch d-flex flex-column justify-content-start">
+            {rooms.map(room => <Row key={room.id} onClick={() => history.push(`/room/${room.id}`)} className="btn text-left m-0 py-1 pb-2 border-bottom">{room.title}</Row>)}
             <Form className="w-100" onSubmit={handleSubmit}>
                 <InputGroup>
                     <Form.Control onChange={(e) => setTitle(e.target.value)} placeholder="Conversation name" value={title} />
@@ -43,7 +43,7 @@ const Rooms = () => {
                     </InputGroup.Append>
                 </InputGroup>
             </Form>
-        </div>
+        </Container>
     )
 }
 

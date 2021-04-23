@@ -2,7 +2,7 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import { faPaperPlane, faImage } from '@fortawesome/free-solid-svg-icons'
 
 import { AuthProvider } from '../contexts/AuthContext'
 import Route from '../router/CustomRoute'
@@ -13,7 +13,7 @@ import Profile from './Profile'
 import Rooms from './Rooms'
 import ChatRoom from './ChatRoom'
 
-library.add(faPaperPlane)
+library.add([faPaperPlane, faImage])
 
 function App() {
 	return (
