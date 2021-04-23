@@ -12,17 +12,16 @@ const ChatRoom = () => {
   const { roomId } = useParams()
   const [message, setMessage] = useState("")
 
-  const collection = firestore.collection("messages")
   const [limit, setLimit] = useState(50)
   const [messages, setMessages] = useState([])
   const endRef = useRef(null)
 
   useEffect(() => {
-    const unsubscribe = collection.orderBy("createdAt", "desc").where("roomId", "==", roomId).limit(limit).onSnapshot((res) => {
+    const unsubscribe = firestore.collection("messages").orderBy("createdAt", "desc").where("roomId", "==", roomId).limit(limit).onSnapshot((res) => {
       setMessages(res.docs.map(doc => doc.data()).reverse())
     })
     return unsubscribe
-  }, [limit])
+  }, [limit, roomId])
 
   useEffect(() => {
     endRef.current?.scrollIntoView({behavior: "smooth"})
@@ -34,7 +33,7 @@ const ChatRoom = () => {
     if (message.length <= 0) {
       return
     }
-    collection.add({
+    firestore.collection("messages").add({
       text: message,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,

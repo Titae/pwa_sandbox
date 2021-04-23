@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
-import { Container, Form, Button, InputGroup } from 'react-bootstrap'
+import { Form, Button, InputGroup } from 'react-bootstrap'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 
 import firebase, { firestore } from '../firebase'
-import { useAuth } from '../contexts/AuthContext'
 
 
 const Rooms = () => {
-    const { user } = useAuth()
     const history = useHistory()
     const [title, setTitle] = useState("")
-
-    const collection = firestore.collection("rooms")
     const [rooms, setRooms] = useState([])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        collection.add({
+        firestore.collection("rooms").add({
             title,
             updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
         }).then((doc) => {
@@ -26,7 +22,7 @@ const Rooms = () => {
     }
 
     useEffect(() => {
-        const unsubscribe = collection.orderBy("updatedAt", "desc").onSnapshot((res) => {
+        const unsubscribe = firestore.collection("rooms").orderBy("updatedAt", "desc").onSnapshot((res) => {
             setRooms(res.docs.map(doc => ({ id: doc.id, ...doc.data() })))
         })
         return unsubscribe
