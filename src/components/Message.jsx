@@ -18,13 +18,14 @@ const Message = ({msg}) => {
         }
 
         loadImages()
+        return () => setImages([])
     }, [])
 
     return <div className={`d-flex flex-column align-items-${msg.uid === user.uid ? "end" : "start"} p-2 m-2 ${styles.msg}`}>
         <label>
             {msg.displayName}
         </label>
-        <span>
+        <span className={`text-${msg.uid === user.uid ? "right" : "left"}`}>
             {msg.text}
             <br/>
             {images.map(url => <img className={"p-2"} alt="message" key={url} src={url} height="125px" width="200px"></img>)}

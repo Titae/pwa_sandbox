@@ -31,29 +31,31 @@ const Login = () => {
   }, [user, history])
   
   return (
-    <div className="w-100" style={{maxWidth: "400px"}}>
-      <Card>
-        <Card.Body>
-        <h2 className="text-center mb-4">Log In</h2>
-        {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group>
-              <Form.Label>Email : </Form.Label>
-              <Form.Control type="email" ref={emailRef}/>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Password : </Form.Label>
-              <Form.Control type="password" ref={passwordRef}/>
-            </Form.Group>
-            <Button type="submit" disabled={loading} className="w-100">Log In</Button>
-          </Form>
-          <div className="w-100 text-center mt-3">
-            <Link to="/reset-password">Forgot password ?</Link>
-          </div>
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        Need an account ? <Link to="/signup">Sign Up</Link>
+    <div className="d-flex justify-content-center align-items-center" style={{height: "100vh", width: "100vw"}}>
+      <div className="w-100" style={{maxWidth: "400px"}}>
+        <Card>
+          <Card.Body>
+          <h2 className="text-center mb-4">Log In</h2>
+          {error && <Alert variant="danger">{error}</Alert>}
+            <Form onSubmit={handleSubmit}>
+              <Form.Group>
+                <Form.Label>Email : </Form.Label>
+                <Form.Control type="email" ref={emailRef}/>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Password : </Form.Label>
+                <Form.Control type="password" ref={passwordRef}/>
+              </Form.Group>
+              <Button type="submit" disabled={loading} className="w-100">Log In</Button>
+            </Form>
+            <div className="w-100 text-center mt-3">
+              <Link to="/reset-password">Forgot password ?</Link>
+            </div>
+          </Card.Body>
+        </Card>
+        <div className="w-100 text-center mt-2">
+          Need an account ? <Link to="/signup">Sign Up</Link>
+        </div>
       </div>
     </div>
   )

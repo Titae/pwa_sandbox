@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.root {
+  min-height: 100vh;
+  max-height: 100vh;
+  min-width: 100vw;
+  max-width: 100vw;
+}
+
+.header {
+  height: 2.5rem;
+}
+
+.fill {
+  position: absolute;
+  top: 2.5rem;
+  width: 100vw;
+  height: calc(100vh - 2.5rem);
+}

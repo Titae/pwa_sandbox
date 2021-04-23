@@ -13,6 +13,7 @@ const ChatRoom = () => {
   const { roomId } = useParams()
   const [message, setMessage] = useState("")
   const [images, setImages] = useState([])
+  const [sending, setSending] = useState(false)
 
   const [limit, setLimit] = useState(50)
   const [messages, setMessages] = useState([])
@@ -33,9 +34,10 @@ const ChatRoom = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const { uid, photoURL, displayName } = user
-    if (message.length <= 0) {
+    if (sending || (message.length <= 0 && images.length === 0)) {
       return
     }
+    setSending(true)
     const metadata = {
       contentType: 'image/jpeg',
     };
@@ -59,6 +61,7 @@ const ChatRoom = () => {
     }).then(() => {
       setMessage("")
       setImages([])
+      setSending(false)
     })
   }
 
@@ -84,7 +87,7 @@ const ChatRoom = () => {
   }
 
   return (
-    <Container fluid className="align-self-stretch justify-self-stretch d-flex flex-column-reverse justify-content-start p-0 m-0">
+    <Container fluid className="align-self-stretch d-flex flex-column-reverse justify-content-start p-0 m-0 fill">
       <Form className="w-100" onSubmit={handleSubmit}>
         {images.map((image, index) => <img alt="upload preview" height="50px" width="50px" key={index} src={image}/>)}
         <InputGroup>

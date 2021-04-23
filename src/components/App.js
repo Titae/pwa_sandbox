@@ -1,8 +1,7 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPaperPlane, faImage } from '@fortawesome/free-solid-svg-icons'
+import { faPaperPlane, faImage, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import { AuthProvider } from '../contexts/AuthContext'
 import Route from '../router/CustomRoute'
@@ -12,14 +11,15 @@ import ResetPassword from './ResetPassword'
 import Profile from './Profile'
 import Rooms from './Rooms'
 import ChatRoom from './ChatRoom'
+import Header from './Header'
 
-library.add([faPaperPlane, faImage])
+library.add([faPaperPlane, faImage, faPlus])
 
 function App() {
 	return (
 		<AuthProvider>
-			<Container className="d-flex align-items-center justify-content-center p-0" style={{ minHeight: '100vh', minWidth: '100vw', maxHeight: '100vh', maxWidth: '100vw'}}>
         <Router>
+          <Header/>
           <Switch>
             <Route pub path='/signup' component={SignUp}/>
             <Route pub path='/login' component={Login}/>
@@ -29,7 +29,6 @@ function App() {
             <Route path="/" component={Rooms}/>
           </Switch>
         </Router>
-			</Container>
 		</AuthProvider>
 	);
 }
